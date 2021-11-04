@@ -1,15 +1,15 @@
 const { exit, stderr } = process;
 
-const allowedFlagConfig = ['-c', '--config'];
+const allowedFlagConfig = ['-c', '--config', '-с'];
 
 module.exports = function (flags) {
   const configFlag = flags.filter((item) => allowedFlagConfig.includes(item));
 
-  if (!configFlag.length || configFlag.length > 1) {
+  if (configFlag.length === 0 || configFlag.length > 1) {
     stderr.write(
-      'The config flag ("-c" or "--config") is required! And only one!'
+      'Ошибка! Флаг конфигурации ("-c" или "--config") обязателен! И только один!'
     );
-    exit();
+    exit(1);
   }
 
   return configFlag;
