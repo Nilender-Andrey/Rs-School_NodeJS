@@ -18,5 +18,5 @@ module.exports = function (flags) {
     checkInputOutputFlag(flags, allowedOutputFlag)
   );
 
-  return codingScheme;
+  return { codingScheme, pathToInputFile, pathToOutputFile };
 };

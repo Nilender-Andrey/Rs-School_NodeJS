@@ -17,7 +17,7 @@ module.exports = function (flags, configFlag) {
     return encodingSchem;
   } else {
     stderr.write(
-      `Ошибка! Аргумент "-с" или '--config' должен стоять перед схемой кодирования`
+      `Ошибка! Аргумент "-с" или '--config' должен стоять перед схемой кодирования.`
     );
     exit(1);
   }

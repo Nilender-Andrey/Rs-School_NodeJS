@@ -31,4 +31,3 @@ module.exports = function (flags, flag) {
     exit(1);
   }
 };
-//! доделать проверку доступа к файлу
