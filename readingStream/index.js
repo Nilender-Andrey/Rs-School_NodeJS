@@ -13,7 +13,7 @@ class myReadingStream extends Readable {
   _construct(callback) {
     fs.open(path.join(__dirname, '..', this.pathFile), (err, fd) => {
       if (err) {
-        stderr.write('Ошибка! Не удалось открыть файл.');
+        stderr.write('Ошибка! Не удалось открыть файл для чтения.');
         exit(1);
       } else {
         this.fd = fd;

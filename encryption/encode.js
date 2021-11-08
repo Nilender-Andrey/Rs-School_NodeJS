@@ -37,9 +37,11 @@ module.exports = function (text, shift) {
     if (arr_en.includes(character.toLowerCase())) {
       const position = arr_en.indexOf(character.toLowerCase());
       if (shift === 'mirror') {
+        const mirrorArr_en = [...arr_en].reverse();
+
         newCharacter = сheckUppercase(character)
-          ? arr_en.reverse()[position].toUpperCase()
-          : arr_en.reverse()[position];
+          ? mirrorArr_en[position].toUpperCase()
+          : mirrorArr_en[position];
       } else {
         const newPosition = (position + shift + arr_en.length) % arr_en.length;
 

@@ -16,5 +16,8 @@ module.exports = function ({
 
   const transformArr = codingScheme.map((item) => new myTransformStream(item));
 
-  pipeline(input, ...transformArr, output, (err) => {});
+  pipeline(input, ...transformArr, output, (err) => {
+    stderr.write('Ошибка передачи данных!');
+    exit(1);
+  });
 };

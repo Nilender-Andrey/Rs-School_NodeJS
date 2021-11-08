@@ -23,6 +23,16 @@ class myWritingStream extends Writable {
   _write(chunk, encoding, callback) {
     fs.write(this.fd, chunk + '\n', callback);
   }
+
+  _destroy(err, callback) {
+    if (this.fd) {
+      fs.close(this.fd, (er) => {
+        callback(er || err);
+      });
+    } else {
+      callback(err);
+    }
+  }
 }
 
 module.exports = myWritingStream;

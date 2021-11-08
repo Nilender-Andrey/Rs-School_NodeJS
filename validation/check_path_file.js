@@ -10,18 +10,14 @@ module.exports = function (flags, flag) {
   if (flags[flagIndex + 1]) {
     const pathFile = flags[flagIndex + 1];
 
-    fs.access(path.join(__dirname, '..', pathFile), function (err) {
-      if (!err) {
-        return pathFile;
-      } else if (err.code === 'ENOENT') {
-        stderr.write(
-          `Ошибка! Файл для ${
-            flag === '-i' || flag === '--input' ? 'чтения' : 'записи'
-          } не найден. Проверьте корректность введеных параметров.`
-        );
-        exit(1);
-      }
-    });
+    if (!fs.existsSync(path.resolve(__dirname, '..', pathFile))) {
+      stderr.write(
+        `Ошибка! Файл для ${
+          flag === '-i' || flag === '--input' ? 'чтения' : 'записи'
+        } не найден. Проверьте корректность введеных параметров.`
+      );
+      exit(1);
+    }
 
     return pathFile;
   } else {

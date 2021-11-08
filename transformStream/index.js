@@ -10,10 +10,6 @@ class myTransformStream extends Transform {
     try {
       const resultString = encryption(chunk.toString('utf8'), this.cipher);
 
-      // const resultString = this.codingScheme.reduce(
-      //   (text, item) => encryption(text, item),
-      //   chunk.toString('utf8')
-      // );
       callback(null, resultString);
     } catch (err) {
       callback(err);
