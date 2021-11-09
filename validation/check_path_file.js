@@ -1,6 +1,6 @@
-const { exit, stderr } = process;
 const fs = require('fs');
 const path = require('path');
+const { ValidationError } = require('../my_errors/errors');
 
 module.exports = function (flags, flag) {
   if (!flag) return null;
@@ -11,19 +11,16 @@ module.exports = function (flags, flag) {
     const pathFile = flags[flagIndex + 1];
 
     if (!fs.existsSync(path.resolve(__dirname, '..', pathFile))) {
-      stderr.write(
-        `Ошибка! Файл для ${
-          flag === '-i' || flag === '--input' ? 'чтения' : 'записи'
-        } не найден. Проверьте корректность введеных параметров.`
+      throw new ValidationError(
+        `No file to ${
+          flag === '-i' || flag === '--input' ? 'read' : 'write'
+        } was found. Check the correctness of the entered parameters.`
       );
-      exit(1);
     }
-
     return pathFile;
   } else {
-    stderr.write(
-      `Ошибка! После флага "${flag}" должен быть указан путь к файлу`
+    throw new ValidationError(
+      `The file path must be specified after the "${flag}" flag.`
     );
-    exit(1);
   }
 };

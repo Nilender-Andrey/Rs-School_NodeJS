@@ -1,8 +1,9 @@
 const { exit, stderr, stdout, stdin } = process;
 const { pipeline } = require('stream');
-const myReadingStream = require('../readingStream');
-const myWritingStream = require('../writingStream');
-const myTransformStream = require('../transformStream');
+const myReadingStream = require('../reading_stream');
+const myWritingStream = require('../writing_stream');
+const transformsCollector = require('../helpers/transformsCollector');
+const listeners = require('../listeners/listeners');
 
 module.exports = function ({
   codingScheme,
@@ -13,11 +14,14 @@ module.exports = function ({
   const output = pathToOutputFile
     ? new myWritingStream(pathToOutputFile)
     : stdout;
+  const transformsArr = transformsCollector(codingScheme);
 
-  const transformArr = codingScheme.map((item) => new myTransformStream(item));
+  listeners(output, pathToOutputFile);
 
-  pipeline(input, ...transformArr, output, (err) => {
-    stderr.write('Ошибка передачи данных!');
-    exit(1);
+  pipeline(input, ...transformsArr, output, (err) => {
+    if (err) {
+      stderr.write('Data transmission error!');
+      exit(1);
+    }
   });
 };

@@ -1,6 +1,6 @@
-# The program is started by the command: node my_caesar_cli
+## The program is started by the command: node my_caesar_cli
 
-## Accepts 3 options:
+### Accepts 3 options:
 
 `-c`, `--config`: config for ciphers Config is a string with pattern {XY(-)}n, where:
 

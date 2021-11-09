@@ -1,6 +1,6 @@
 const fs = require('fs');
-const { exit, stderr } = process;
 const path = require('path');
+const { exit, stderr } = process;
 const { Readable } = require('stream');
 
 class myReadingStream extends Readable {
@@ -13,7 +13,7 @@ class myReadingStream extends Readable {
   _construct(callback) {
     fs.open(path.join(__dirname, '..', this.pathFile), (err, fd) => {
       if (err) {
-        stderr.write('Ошибка! Не удалось открыть файл для чтения.');
+        stderr.write('Error! Failed to open file for reading.');
         exit(1);
       } else {
         this.fd = fd;
@@ -24,7 +24,7 @@ class myReadingStream extends Readable {
   _read() {
     fs.read(this.fd, (err, bytesRead, buffer) => {
       if (err) {
-        stderr.write('Ошибка! Не удалось прочитать файл.');
+        stderr.write('Error! Failed to read file.');
         exit(1);
       } else {
         this.push(bytesRead > 0 ? buffer.slice(0, bytesRead) : null);

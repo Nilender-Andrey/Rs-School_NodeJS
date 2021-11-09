@@ -1,26 +1,60 @@
-const encode = require('./encode');
+const сheckUppercase = require('../helpers/сheck_uppercase');
 
-module.exports = function (text, cipher) {
-  let shift = 0;
-  switch (cipher) {
-    case 'C1':
-      shift = 1;
-      break;
-    case 'C0':
-      shift = -1;
-      break;
-    case 'R1':
-      shift = 8;
-      break;
-    case 'R0':
-      shift = -8;
-      break;
-    case 'A':
-      shift = 'mirror';
-      break;
-    default:
-      break;
+let arr_en = [
+  'a',
+  'b',
+  'c',
+  'd',
+  'e',
+  'f',
+  'g',
+  'h',
+  'i',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'o',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z',
+];
+
+module.exports = function (text, shift) {
+  let newText = '';
+  let newCharacter;
+
+  for (let character of text) {
+    if (arr_en.includes(character.toLowerCase())) {
+      const position = arr_en.indexOf(character.toLowerCase());
+
+      if (shift === 'mirror') {
+        const mirrorArr_en = [...arr_en].reverse();
+
+        newCharacter = сheckUppercase(character)
+          ? mirrorArr_en[position].toUpperCase()
+          : mirrorArr_en[position];
+      } else {
+        const newPosition = (position + shift + arr_en.length) % arr_en.length;
+
+        newCharacter = сheckUppercase(character)
+          ? arr_en[newPosition].toUpperCase()
+          : arr_en[newPosition];
+      }
+    } else {
+      newCharacter = character;
+    }
+    newText += newCharacter;
   }
 
-  return encode(text, shift);
+  return newText;
 };

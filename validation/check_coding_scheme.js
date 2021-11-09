@@ -1,24 +1,24 @@
-const { exit, stderr } = process;
+const { ValidationError } = require('../my_errors/errors');
+
 const permissibleEncodingSchemes = ['C1', 'C0', 'R1', 'R0', 'A'];
 
 module.exports = function (flags, configFlag) {
   const flagIndex = flags.indexOf(configFlag[0]);
 
   if (flags[flagIndex + 1]) {
-    const encodingSchem = flags[flagIndex + 1].split('-');
-    encodingSchem.forEach((element) => {
+    const encodingScheme = flags[flagIndex + 1].split('-');
+
+    encodingScheme.forEach((element) => {
       if (!permissibleEncodingSchemes.includes(element)) {
-        stderr.write(
-          `Ошибка! Неправильная схема кодирования! Поддерживаемый формат "C1-C1-A-R0" и значения ${permissibleEncodingSchemes}.`
+        throw new ValidationError(
+          `Incorrect coding scheme! Supported -c "C1-C1-A-R0" format and values ${permissibleEncodingSchemes}.`
         );
-        exit(1);
       }
     });
-    return encodingSchem;
+    return encodingScheme;
   } else {
-    stderr.write(
-      `Ошибка! Аргумент "-с" или '--config' должен стоять перед схемой кодирования.`
+    throw new ValidationError(
+      `The "-c" or "--config" argument must come before the encoding scheme.`
     );
-    exit(1);
   }
 };
