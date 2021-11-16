@@ -1,0 +1,22 @@
+{
+  "name": "testing",
+  "version": "1.0.0",
+  "description": "### Accepts 3 options:",
+  "main": "my_ciphering_cli.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nilender-Andrey/Rs-School_NodeJS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nilender-Andrey/Rs-School_NodeJS/issues"
+  },
+  "homepage": "https://github.com/Nilender-Andrey/Rs-School_NodeJS#readme",
+  "devDependencies": {
+    "jest": "^27.3.1"
+  }
+}
