@@ -1,17 +1,17 @@
-const checkUppercase = require('./сheck_uppercase');
+const checkUppercase = require('../helpers/сheck_uppercase');
 
 describe('checkUppercase', () => {
   test.each([
     ['AAA', new Error('Entered incorrect data')],
     ['fff', new Error('Entered incorrect data')],
-  ])('%p checking for incorrect input', (letter, result) =>
-    expect(() => checkUppercase(letter, result)).toThrowError(result)
+  ])('check if the input is correct', (letter, result) =>
+    expect(() => checkUppercase(letter)).toThrowError(result)
   );
 
   test.each([
     ['A', true],
     ['f', false],
-  ])('%p checking for different registers', (letter, result) =>
+  ])('check different registers', (letter, result) =>
     expect(checkUppercase(letter)).toBe(result)
   );
 });
