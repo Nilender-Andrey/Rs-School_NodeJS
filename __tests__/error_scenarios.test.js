@@ -1,6 +1,5 @@
 const validation = require('../validation');
 const worker = require('../worker/worker');
-const { ValidationError } = require('../my_errors/errors');
 
 describe('Error scenarios', () => {
   const flags = jest.fn((x) => x.split(' ').slice(2));

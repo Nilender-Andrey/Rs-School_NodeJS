@@ -10,7 +10,7 @@ class myWritingStream extends Writable {
   }
 
   _construct(callback) {
-    fs.open(path.join(__dirname, '..', this.pathFile), 'a', (err, fd) => {
+    fs.open(path.join(__dirname, '../..', this.pathFile), 'a', (err, fd) => {
       if (err) {
         stderr.write('Error! Could not open file for writing.');
         exit(1);

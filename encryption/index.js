@@ -1,4 +1,4 @@
-const сheckUppercase = require('../helpers/сheck_uppercase');
+const сheckUppercase = require('../helpers/check_uppercase');
 
 let arr_en = [
   'a',

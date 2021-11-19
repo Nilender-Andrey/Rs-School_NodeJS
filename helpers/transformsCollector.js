@@ -2,7 +2,7 @@ const {
   CTransformStream,
   RTransformStream,
   ATransformStream,
-} = require('../transform_streams');
+} = require('../streams/transform_streams');
 
 module.exports = function (codingScheme) {
   return codingScheme.map((item) => {

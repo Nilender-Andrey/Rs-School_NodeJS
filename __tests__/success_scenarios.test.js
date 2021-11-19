@@ -1,21 +1,33 @@
 const { spawn } = require('child_process');
-const writingStream = require('../writing_stream');
-const readingStream = require('../reading_stream');
-
-/* jest.mock('../reading_stream', () => {
-  return jest.fn(() => 'This is secret. Message about "_" symbol!');
-}); */
-//jest.mock('../writing_stream', () => jest.fn());
-
-//const mockOne = jest.fn(() => false);
-
-//const mockCallback = jest.fn(() => cp.stdin.end());
-
-// function fakeTerminalAndInterceptFileWrite(enter, callback) {
-//   const cp = spawn('node', [...enter]);
-// }
 
 describe('Success scenarios', () => {
+  test('1. Correct character sequence for --config', () => {
+    const ENTERED_DATA_INTO_THE_TERMINAL = [
+      'my_ciphering_cli.js',
+      '--config',
+      'C1-C0-A-R0-R1',
+    ];
+
+    const promise = new Promise((resolve) => {
+      const cp = spawn('node', [...ENTERED_DATA_INTO_THE_TERMINAL]);
+      let res = '';
+
+      cp.stdin.write('Ok\n');
+      cp.stdin.end();
+
+      cp.stdout.on('data', (data) => {
+        res += data.toString();
+      });
+
+      cp.stdout.on('end', () => {
+        resolve(res.trim());
+      });
+    });
+
+    expect.assertions(1);
+    return expect(promise).resolves.toEqual('Lp');
+  });
+
   test.each([
     [
       [
@@ -60,50 +72,9 @@ describe('Success scenarios', () => {
         './output.txt',
       ],
     ],
-  ])('examples from first task', (enter) => {
+  ])('2. examples from first task', (enter) => {
     expect(() => {
       spawn('node', [...enter]);
     }).not.toThrowError();
   });
 });
-
-//********************************************* */
-/* 
-function fakeTerminal(enter, callback) {
-  const cp = spawn('node', [...enter]);
-  let res = '';
-
-  cp.stdin.write('Ok\n');
-  cp.stdin.end();
-
-  cp.stdout.on('data', (data) => {
-    res += data.toString();
-  });
-
-  cp.stdout.on('end', () => {
-    callback(res.trim());
-  });
-}
-
-describe('Success scenarios', () => {
-  const ENTERED_DATA_INTO_THE_TERMINAL = [
-    'my_ciphering_cli.js',
-    '--config',
-    'C1-C0-A-R0-R1',
-  ];
-
-  test('1. Correct character sequence for --config', (done) => {
-    function callback(data) {
-      try {
-        expect(data).toBe('Lp');
-        done();
-      } catch (error) {
-        done(error);
-      }
-    }
-
-    fakeTerminal(ENTERED_DATA_INTO_THE_TERMINAL, callback);
-  });
-});
-*/
-//********************************************* */

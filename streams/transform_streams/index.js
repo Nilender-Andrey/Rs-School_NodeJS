@@ -1,5 +1,5 @@
 const { Transform } = require('stream');
-const encode = require('../encryption/index');
+const encode = require('../../encryption/index');
 
 class ATransformStream extends Transform {
   constructor() {

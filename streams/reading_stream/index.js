@@ -11,7 +11,7 @@ class myReadingStream extends Readable {
   }
 
   _construct(callback) {
-    fs.open(path.join(__dirname, '..', this.pathFile), (err, fd) => {
+    fs.open(path.join(__dirname, '../..', this.pathFile), (err, fd) => {
       if (err) {
         stderr.write('Error! Failed to open file for reading.');
         exit(1);

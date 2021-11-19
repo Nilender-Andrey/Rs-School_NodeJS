@@ -1,23 +1,44 @@
+const worker = require('./worker/worker');
 const { spawn } = require('child_process');
 
-spawn('node', [
-  'my_ciphering_cli.js',
-  '-c',
-  'C1-C1-R0-A',
-  '-i',
-  './input.txt',
-  '-o',
-  './output.txt',
-]);
+const promise = new Promise((resolve) => {
+  const data = {
+    codingScheme: ['A'],
+    pathToInputFile: null,
+    pathToOutputFile: null,
+  };
 
-const ENTERED_DATA_INTO_THE_TERMINAL = [
-  'my_ciphering_cli',
-  '-c',
-  'C1-C1-R0-A',
-  '-i',
-  './input.txt',
-  '-o',
-  './output.txt',
-];
+  resolve(spawn('node', [worker(data)]));
+});
 
-spawn('node', [...ENTERED_DATA_INTO_THE_TERMINAL]);
+promise.then((cp) => {
+  let res = '';
+
+  cp.stdin.write('Ok\n');
+  cp.stdin.end();
+  //process.stdin.write('Ok\n');
+
+  // cp.stdout.on('data', (data) => {
+  //   res += data.toString();
+  // });
+
+  // cp.stdout.on('end', () => {
+  //   console.log('end', res);
+  //   // resolve(res.trim());
+  // });
+});
+
+/*  let res = '';
+
+  // cp.stdin.write('Ok\n');
+  cp.stdin.end();
+  //process.stdin.write('Ok\n');
+
+  cp.stdout.on('data', (data) => {
+    res += data.toString();
+  });
+
+  cp.stdout.on('end', () => {
+    console.log('end', res);
+    resolve(res.trim());
+  }); */

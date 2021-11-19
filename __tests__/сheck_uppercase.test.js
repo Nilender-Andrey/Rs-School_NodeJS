@@ -1,4 +1,4 @@
-const checkUppercase = require('../helpers/сheck_uppercase');
+const checkUppercase = require('../helpers/check_uppercase');
 
 describe('checkUppercase', () => {
   test.each([
