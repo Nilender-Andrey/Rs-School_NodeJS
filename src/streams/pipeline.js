@@ -4,7 +4,7 @@ const { exit, stderr } = process;
 module.exports = function (input, transformsArr, output) {
   pipeline(input, ...transformsArr, output, (err) => {
     if (err) {
-      stderr.write('Data transmission error!');
+      stderr.write(' Data transmission error!');
       exit(1);
     }
   });

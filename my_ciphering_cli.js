@@ -1,6 +1,6 @@
-const validation = require('./validation');
-const worker = require('./worker/worker');
-const { ValidationError } = require('./my_errors/errors');
+const validation = require('./src/validation');
+const worker = require('./src/worker/worker');
+const { ValidationError } = require('./src/my_errors/errors');
 const { exit, stderr } = process;
 
 const flags = process.argv.slice(2);

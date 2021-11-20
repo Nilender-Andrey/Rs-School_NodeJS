@@ -1,5 +1,5 @@
-const validation = require('../validation');
-const { ValidationError } = require('../my_errors/errors');
+const validation = require('../src/validation');
+const { ValidationError } = require('../src/my_errors/errors');
 
 describe('validation', () => {
   test('correct data', () => {

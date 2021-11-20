@@ -10,7 +10,7 @@ module.exports = function (flags, flag) {
   if (flags[flagIndex + 1]) {
     const pathFile = flags[flagIndex + 1];
 
-    if (!fs.existsSync(path.resolve(__dirname, '..', pathFile))) {
+    if (!fs.existsSync(path.resolve(__dirname, '../..', pathFile))) {
       throw new ValidationError(
         `No file to ${
           flag === '-i' || flag === '--input' ? 'read' : 'write'

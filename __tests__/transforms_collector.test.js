@@ -1,4 +1,4 @@
-const transformsCollector = require('../helpers/transformsCollector');
+const transformsCollector = require('../src/helpers/transforms_collector');
 
 describe('transformsCollector', () => {
   test('check return type', () =>
