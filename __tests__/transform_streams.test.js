@@ -5,11 +5,4 @@ describe('transform_streams', () => {
     const transformStreams = new ATransformStream();
     expect(transformStreams.shift).toBe('mirror');
   });
-
-  //todo test('check shift', () => {
-  //   const transformStreams = new ATransformStream();
-  //   expect(() => {
-  //     transformStreams.transform();
-  //   }).toBe('mirror');
-  // });
 });

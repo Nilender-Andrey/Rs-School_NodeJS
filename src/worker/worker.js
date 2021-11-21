@@ -1,4 +1,4 @@
-const pipelineWorker = require('../streams/pipeline');
+const pipelineWorker = require('../streams/pipeline_worker');
 const input = require('../helpers/input');
 const output = require('../helpers/output');
 const transformsCollector = require('../helpers/transforms_collector');

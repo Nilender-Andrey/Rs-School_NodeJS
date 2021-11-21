@@ -2,8 +2,8 @@ const checkUppercase = require('../src/helpers/check_uppercase');
 
 describe('checkUppercase', () => {
   test.each([
-    ['AAA', new Error('Entered incorrect data')],
-    ['fff', new Error('Entered incorrect data')],
+    ['AAA', 'Entered incorrect data'],
+    ['fff', 'Entered incorrect data'],
   ])('check if the input is correct', (letter, result) =>
     expect(() => checkUppercase(letter)).toThrowError(result)
   );

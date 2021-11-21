@@ -1,7 +1,7 @@
+const fs = require('fs');
 const { stderr } = process;
 const path = require('path');
 const { Writable } = require('stream');
-const fs_write = require('./fs_write');
 const fs_open = require('../open_fs');
 
 class myWritingStream extends Writable {
@@ -25,7 +25,7 @@ class myWritingStream extends Writable {
 
   _write(chunk, encoding, callback) {
     try {
-      fs_write(this.fd, chunk, callback);
+      fs.write(this.fd, chunk, callback);
     } catch (err) {
       stderr.write('Error writing to file.');
       callback(err);
