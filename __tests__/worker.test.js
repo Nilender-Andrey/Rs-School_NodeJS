@@ -1,5 +1,6 @@
 const worker = require('../src/worker/worker');
 const pipelineWorker = require('../src/streams/pipeline_worker');
+const writingStream = require('../src/streams/writing_stream');
 
 jest.mock('../src/streams/pipeline_worker.js');
 
